@@ -60,6 +60,10 @@
   <script src="{{url('vendors/moment/min/moment.min.js')}}"></script>
   <script src="{{url('vendors/fullcalendar/dist/fullcalendar.min.js')}}"></script>
 
+  <!-- ECharts -->
+  <script src="../vendors/echarts/dist/echarts.min.js"></script>
+  <script src="../vendors/echarts/map/js/world.js"></script>
+
   <!-- Custom Theme Scripts -->
   <script src="{{url('js/custom.min.js')}}"></script>
 
