@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UsersRequest;
+use App\Photo;
 use App\Role;
 use App\User;
-use DateTime;
 use Illuminate\Http\Request;
 
 class AdminUsersController extends Controller
@@ -34,9 +34,8 @@ class AdminUsersController extends Controller
         //
 
         $roles = Role::pluck('name', 'id')->all(); //method lists is removed from 5.3 and we use pluck now
-        $time = new DateTime();
 
-        return view('admin.users.create', compact('roles', 'date'));
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -49,9 +48,35 @@ class AdminUsersController extends Controller
     {
         //
 
-        User::create($request->all());
+        if (trim($request->password) == '') {
+
+            $input = $request->except('password');
+
+        } else {
+
+            $input = $request->all();
+
+            $input['password'] = bcrypt($request->password);
+
+        }
+
+        if ($file = $request->file('photo_id')) {
+
+            $name = time() . $file->getClientOriginalName();
+
+            $file->move('images/profiles', $name);
+
+            $photo = Photo::create(['file' => $name]);
+
+            $input['photo_id'] = $photo->id;
+
+        }
+
+        User::create($input);
+
+        // User::create($request->all());
         return redirect('/users/list');
-        //return $request->all();
+
     }
 
     /**
