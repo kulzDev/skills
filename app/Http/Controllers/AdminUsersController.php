@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsersRequest;
 use App\Role;
 use App\User;
+use DateTime;
 use Illuminate\Http\Request;
 
 class AdminUsersController extends Controller
@@ -32,8 +34,9 @@ class AdminUsersController extends Controller
         //
 
         $roles = Role::pluck('name', 'id')->all(); //method lists is removed from 5.3 and we use pluck now
+        $time = new DateTime();
 
-        return view('admin.users.create', compact('roles'));
+        return view('admin.users.create', compact('roles', 'date'));
     }
 
     /**
@@ -42,11 +45,13 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UsersRequest $request)
     {
         //
 
-        return $request->all();
+        User::create($request->all());
+        return redirect('/users/list');
+        //return $request->all();
     }
 
     /**

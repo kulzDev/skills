@@ -28,7 +28,10 @@
                 </ul>
                 <div class="clearfix"></div>
               </div>
-              <div class="x_content">                    
+              <div class="x_content"> 
+                
+                {{$users}}
+                
                 <table id="datatable-buttons" class="table table-striped table-bordered">
                   <thead>
                     <tr>
@@ -58,7 +61,7 @@
                             {{$user->is_active ?  'Active' : 'Not Active'}}
                             </td>
                           <td>{{$user->created_at}}</td> 
-                          <td>{{$user->updated_at->diffForHumans()}}</td>                                       
+                          <td>{{$user->updated_at}}</td>     {{-- use ->diffForHumans() for better readability--}}                                  
                           <td>
                               <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
                               <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
