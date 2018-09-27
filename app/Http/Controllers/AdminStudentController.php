@@ -6,7 +6,7 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
-class AdminUsersController extends Controller
+class AdminStudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,6 @@ class AdminUsersController extends Controller
     public function index()
     {
         //
-
-        $users = User::all();
-
-        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -31,9 +27,9 @@ class AdminUsersController extends Controller
     {
         //
 
-        $roles = Role::pluck('name', 'id')->all(); //method lists is removed from 5.3 and we use pluck now
+        $roles = Role::pluck('name', 'id')->all();   //method lists is removed from 5.3 and we use pluck now
 
-        return view('admin.users.create', compact('roles'));
+        return view('content.students.create', compact('roles'));
     }
 
     /**
@@ -45,7 +41,7 @@ class AdminUsersController extends Controller
     public function store(Request $request)
     {
         //
-
+        // echo 'hi';
         return $request->all();
     }
 
@@ -96,15 +92,21 @@ class AdminUsersController extends Controller
 
     //******************** STUDENT PAGES ********************
 
-    public function user_list()
+    public function student_list()
     {
 
         $users = User::all();
-        return view('admin.users.list', compact('users'));
+
+        return view('content.students.list', compact('users'));
     }
 
-    public function user_profile()
+    public function student_profile()
     {
-        return view('admin.users.profile');
+        return view('content.students.profile');
+    }
+
+    public function student_progress()
+    {
+        return view('content.students.progress');
     }
 }

@@ -31,14 +31,22 @@ Route::get('/admin', function () {
 Route::get('/admin', 'PagesController@admin_dashboard'); //this can't be like this-----sort out
 Route::get('/dashboard', 'PagesController@admin_dashboard'); // this can't be like this ----SORT THIS
 
-//******************** STUDENT  PAGES ********************
-Route::get('/studentlist', 'PagesController@student_list');
-Route::get('/studentprofile', 'PagesController@student_profile');
-Route::get('/progressreport', 'PagesController@student_progress');
+//******************** USERS  PAGES ********************
+Route::get('/users/list', 'AdminUsersController@user_list');
+Route::get('/users/profile', 'AdminUsersController@user_profile');
+Route::get('/users/create', 'AdminUsersController@create');
+Route::post('/users/store', 'AdminUsersController@store');
 
-//******************** INSTRUCTOR PAGES ********************
-Route::get('/instructorlist', 'PagesController@instructor_list');
-Route::get('/instructorprofiles', 'PagesController@instructor_profile');
+// //******************** STUDENT  PAGES ********************
+// Route::get('/userslist', 'AdminStudentController@student_list');
+// Route::get('/usersprofile', 'AdminStudentController@student_profile');
+// Route::get('/progressreport', 'AdminStudentController@student_progress');
+// Route::get('/user/create', 'AdminStudentController@create');
+// Route::post('/user/store', 'AdminStudentController@store');
+
+// //******************** INSTRUCTOR PAGES ********************
+// Route::get('/instructorlist', 'PagesController@instructor_list');
+// Route::get('/instructorprofiles', 'PagesController@instructor_profile');
 
 //******************** COURSES PAGES ********************
 Route::get('/courses', 'PagesController@courses');

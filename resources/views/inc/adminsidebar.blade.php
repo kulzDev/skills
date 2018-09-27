@@ -7,17 +7,11 @@
         <ul class="nav side-menu">
             <li><a href="{{url('/dashboard')}}"><i class="fa fa-dashboard active"></i> Dashboard </a></li>
             
-            <li><a><i class="fa fa-group"></i> Instructors <span class="fa fa-chevron-down"></span></a>
+         
+            <li><a><i class="fa fa-group"></i> Users <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                        <li><a href="{{url('/instructorlist')}}">List </a>
-                        <li><a href="{{url('/instructorprofiles')}}">Profiles </a>
-                </ul>
-            </li>
-
-            <li><a><i class="fa fa-group"></i> Students <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                        <li><a href="{{url('/studentlist')}}"> List </a>
-                        <li><a href="{{url('/studentprofile')}}"> Profiles </a>
+                        <li><a href="{{url('/users/list')}}"> List </a>
+                        <li><a href="{{url('/users/profile')}}"> Profiles </a>
                         <li><a href="{{url('/progressreport')}}"> Progress Report </a>
                 </ul>
             </li>

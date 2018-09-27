@@ -23,7 +23,7 @@
                
                 <ul class="nav navbar-right panel_toolbox">
                  
-                  <li> <a href="{{url('/student/create')}}"><span class="btn btn-primary">Add Student</span> </a></li>  
+                  <li> <a href="{{url('/users/create')}}"><span class="btn btn-primary">Add Student</span> </a></li>  
                              
                 </ul>
                 <div class="clearfix"></div>

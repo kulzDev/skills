@@ -10,23 +10,6 @@ class PagesController extends Controller
         return view('content.dashboard');
     }
 
-    //******************** STUDENT PAGES ********************
-
-    public function student_list()
-    {
-        return view('content.students.list');
-    }
-
-    public function student_profile()
-    {
-        return view('content.students.profile');
-    }
-
-    public function student_progress()
-    {
-        return view('content.students.progress');
-    }
-
     //******************** INSTRUCTOR PAGES ********************
 
     public function instructor_list()
