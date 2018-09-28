@@ -118,8 +118,19 @@ class AdminUsersController extends Controller
     {
         //
 
+        if (trim($request->password) == '') {
+
+            $input = $request->except('password');
+
+        } else {
+
+            $input = $request->all();
+
+            $input['password'] = bcrypt($request->password);
+
+        }
+
         $user = User::findOrFail($id);
-        $input = $request->all();
 
         if ($file = $request->file('photo_id')) {
 

@@ -21,23 +21,33 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::resource('admin/users', 'AdminUsersController');
 
-Route::get('/admin', function () {
+// Route::get('/admin', function () {
 
-    return view('admin.index');
+//     return view('admin.index');
+// });
+
+Route::group(['middleware' => 'admin'], function () {
+
+    // Route::get('/admin', function () {
+
+    //     return view('admin.index');
+
+    // });
+
+    //******************** COURSE ROUTES ********************
+
+    Route::get('/admin', 'PagesController@admin_dashboard'); //this can't be like this-----sort out
+    Route::get('/dashboard', 'PagesController@admin_dashboard'); // this can't be like this ----SORT THIS
+
+    //******************** USERS  PAGES ********************
+    Route::get('/users/list', 'AdminUsersController@user_list');
+    Route::get('/users/profile', 'AdminUsersController@user_profile');
+    Route::get('/users/create', 'AdminUsersController@create');
+    Route::post('/users/store', 'AdminUsersController@store');
+    Route::get('/users/edit/{id}', 'AdminUsersController@edit');
+    Route::patch('/users/update/{id}', 'AdminUsersController@update');
+
 });
-
-//******************** COURSE ROUTES ********************
-
-Route::get('/admin', 'PagesController@admin_dashboard'); //this can't be like this-----sort out
-Route::get('/dashboard', 'PagesController@admin_dashboard'); // this can't be like this ----SORT THIS
-
-//******************** USERS  PAGES ********************
-Route::get('/users/list', 'AdminUsersController@user_list');
-Route::get('/users/profile', 'AdminUsersController@user_profile');
-Route::get('/users/create', 'AdminUsersController@create');
-Route::post('/users/store', 'AdminUsersController@store');
-Route::get('/users/edit/{id}', 'AdminUsersController@edit');
-Route::patch('/users/update/{id}', 'AdminUsersController@update');
 
 //Route::resource('admin/users', 'AdminUsersController');
 

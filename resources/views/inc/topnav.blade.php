@@ -11,7 +11,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li class="">
             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <img src="images/img.jpg" alt=""> Username
+              <img src="{{url(Auth::user()->photo ? Auth::user()->photo->file : '/images/profiles/placeholder.png')}}" alt="">  {{ Auth::user()->name }} 
               <span class=" fa fa-angle-down"></span>
             </a>
 
