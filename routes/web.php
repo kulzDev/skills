@@ -36,6 +36,10 @@ Route::get('/users/list', 'AdminUsersController@user_list');
 Route::get('/users/profile', 'AdminUsersController@user_profile');
 Route::get('/users/create', 'AdminUsersController@create');
 Route::post('/users/store', 'AdminUsersController@store');
+Route::get('/users/edit/{id}', 'AdminUsersController@edit');
+Route::patch('/users/update/{id}', 'AdminUsersController@update');
+
+//Route::resource('admin/users', 'AdminUsersController');
 
 // //******************** STUDENT  PAGES ********************
 // Route::get('/userslist', 'AdminStudentController@student_list');

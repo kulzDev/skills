@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\UsersRequest;
 use App\Photo;
 use App\Role;
@@ -99,6 +100,11 @@ class AdminUsersController extends Controller
     public function edit($id)
     {
         //
+
+        $user = User::findOrFail($id);
+        $roles = Role::pluck('name', 'id')->all();
+
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -108,9 +114,27 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsersEditRequest $request, $id)
     {
         //
+
+        $user = User::findOrFail($id);
+        $input = $request->all();
+
+        if ($file = $request->file('photo_id')) {
+
+            $name = time() . $file->getClientOriginalName();
+
+            $file->move('images/profiles', $name);
+
+            $photo = Photo::create(['file' => $name]);
+
+            $input['photo_id'] = $photo->id;
+
+        }
+
+        $user->update($input);
+        return redirect('/users/list');
     }
 
     /**
@@ -137,4 +161,19 @@ class AdminUsersController extends Controller
     {
         return view('admin.users.profile');
     }
+
+    public function edit2()
+    {
+        //
+
+        // $user = User::findOrFail($id);
+        // $roles = Role::pluck('name', 'id')->all();
+
+        return view('admin.users.edit'); //, compact('user', 'roles'));
+
+        // $roles = Role::pluck('name', 'id')->all(); //method lists is removed from 5.3 and we use pluck now
+
+        // return view('admin.users.create', compact('roles'));
+    }
+
 }
