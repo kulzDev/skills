@@ -25,6 +25,15 @@ class AdminUsersController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
+    // public function home()
+    // {
+    //     //
+
+    //     $users = User::all();
+
+    //     return view('admin.users.index', compact('users'));
+    // }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -173,18 +182,9 @@ class AdminUsersController extends Controller
         return view('admin.users.profile');
     }
 
-    public function edit2()
+    public function admin_dashboard()
     {
-        //
-
-        // $user = User::findOrFail($id);
-        // $roles = Role::pluck('name', 'id')->all();
-
-        return view('admin.users.edit'); //, compact('user', 'roles'));
-
-        // $roles = Role::pluck('name', 'id')->all(); //method lists is removed from 5.3 and we use pluck now
-
-        // return view('admin.users.create', compact('roles'));
+        return view('admin.dashboard');
     }
 
 }

@@ -26,11 +26,15 @@ class HomeController extends Controller
 
         if (Auth::user()->isAdmin()) {
 
-            return view('/content/dashboard');
+            return view('/admin/dashboard');
 
+        } elseif (Auth::user()->isStudent()) {
+
+            return view('/student/home');
+        } else {
+
+            return redirect('/lecture/dashboard'); //Lecture
         }
-
-        return redirect('/');
 
     }
 }

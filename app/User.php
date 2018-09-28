@@ -60,4 +60,22 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function isStudent()
+    {
+
+        if ($this->role->name == "Student" && $this->is_active == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isLecture()
+    {
+
+        if ($this->role->name == "Lecture" && $this->is_active == 1) {
+            return true;
+        }
+        return false;
+    }
 }

@@ -2,6 +2,6 @@
 
 @section('content')   
 
-@include('admin.dashboard')
+@include('student.home')
 
 @endsection
