@@ -98,6 +98,11 @@ class AdminUsersController extends Controller
     public function show($id)
     {
         //
+
+        $user = User::findOrFail($id);
+        $roles = Role::pluck('name', 'id')->all();
+
+        return view('admin.users.user_profile', compact('user', 'roles'));
     }
 
     /**
@@ -179,7 +184,8 @@ class AdminUsersController extends Controller
 
     public function user_profile()
     {
-        return view('admin.users.profile');
+        $users = User::all();
+        return view('admin.users.profile_list', compact('users'));
     }
 
     public function admin_dashboard()

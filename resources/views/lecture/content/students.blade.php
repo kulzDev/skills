@@ -57,7 +57,7 @@
                 <td>61</td>
                 <td>2011/04/25</td>
                 <td>
-                    <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                    <a href="{{url(strtolower($user->role->name).'/users/show',$user->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
                     <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                     <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
 

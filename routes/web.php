@@ -35,12 +35,17 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin', 'AdminUsersController@admin_dashboard');
     Route::get('/dashboard', 'AdminUsersController@admin_dashboard');
     Route::get('/users/list', 'AdminUsersController@user_list');
-    Route::get('/users/profile', 'AdminUsersController@user_profile');
+    Route::get('/profile/list', 'AdminUsersController@user_profile');
     Route::get('/users/create', 'AdminUsersController@create');
     Route::post('/users/store', 'AdminUsersController@store');
     Route::get('/users/edit/{id}', 'AdminUsersController@edit');
     Route::patch('/users/update/{id}', 'AdminUsersController@update');
 
+    Route::get('/administrator/users/show/{id}', 'AdminUsersController@show');
+    Route::get('/lecture/users/show/{id}', 'LectureController@show');
+    Route::get('/student/users/show/{id}', 'StudentController@show');
+
+    //PAGES
     Route::get('/viewcourses', 'PagesController@course_material_view');
     Route::get('/uploadcourses', 'PagesController@course_material_upload');
     Route::get('/courses', 'PagesController@courses');
@@ -50,6 +55,8 @@ Route::group(['middleware' => 'admin'], function () {
 });
 
 Route::group(['middleware' => 'student'], function () {
+
+    Route::get('/student/users/show/{id}', 'StudentController@show');
 
     //******************** STUDENT ROUTES ********************
     // Route::get('/', 'StudentController@home');
@@ -64,6 +71,9 @@ Route::group(['middleware' => 'student'], function () {
 });
 
 Route::group(['middleware' => 'lecture'], function () {
+
+    Route::get('/lecture/users/show/{id}', 'LectureController@show');
+    Route::get('/student/users/show/{id}', 'StudentController@show');
 
     // Route::get('/', 'LectureController@home');
     Route::get('/lecture/dashboard', 'LectureController@index');

@@ -11,7 +11,7 @@
             <li><a><i class="fa fa-group"></i> Users <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                         <li><a href="{{url('/users/list')}}"> List </a>
-                        <li><a href="{{url('/users/profile')}}"> Profiles </a>
+                        <li><a href="{{url('/profile/list')}}"> Profiles </a>
                         <li><a href="{{url('/progressreport')}}"> Progress Report </a>
                 </ul>
             </li>
@@ -29,6 +29,8 @@
             <li><a href="{{url('/discussions')}}"><i class="fa fa-comments"></i> Discussions </a></li>
 
             <li><a href="{{url('/calendar')}}"><i class="fa fa-calendar"></i> Calender </a></li>
+
+            <li><a href="{{url('/profiles')}}"><i class="fa fa-calendar"></i> profile </a></li>
 
            
         </ul>

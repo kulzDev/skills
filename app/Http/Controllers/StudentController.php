@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -55,6 +57,11 @@ class StudentController extends Controller
     public function show($id)
     {
         //
+
+        $user = User::findOrFail($id);
+        $roles = Role::pluck('name', 'id')->all();
+
+        return view('student.content.user_profile', compact('user', 'roles'));
     }
 
     /**

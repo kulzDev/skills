@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 
 class LectureController extends Controller
@@ -55,7 +56,10 @@ class LectureController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $roles = Role::pluck('name', 'id')->all();
+
+        return view('lecture.content.user_profile', compact('user', 'roles'));
     }
 
     /**

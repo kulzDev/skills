@@ -63,7 +63,7 @@
                           <td><img  height="20" src="{{url($user->photo ? $user->photo->file : '/images/profiles/placeholder.png')}}" alt=" "></td>   
                           {{-- //  use ->diffForHumans() for better readability                                   --}}
                           <td>
-                              <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                              <a href="{{url('/administrator/users/show',$user->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
                               <a href="{{url('/users/edit',$user->id)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                               <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
           
