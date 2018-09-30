@@ -16,6 +16,7 @@
     <div class="row">
 
         <div class="col-md-12 col-sm-12 col-xs-12">
+
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Profile </h2>
@@ -31,15 +32,15 @@
                                     <img class="img-responsive avatar-view" src="{{url($user->photo ? $user->photo->file : '/images/profiles/placeholder.png')}}" alt="Avatar" title="Change the avatar">
                                 </div>
                             </div>
-                            <h3>{{ucfirst($user->name)}}</h3>
+                            <h3>{{ucfirst($user->name). ' ' .ucfirst($user->surname) }} </h3>
 
                             <ul class="list-unstyled user_data">
-                              <li><i class="fa fa-map-marker user-profile-icon"></i> San Francisco, California, USA
-                              </li>
-      
-                              <li>
-                                <i class="fa fa-briefcase user-profile-icon"></i> {{$user->role->name}}
-                              </li>
+
+                                <li>
+                                    <i class="fa fa-briefcase user-profile-icon"></i> {{$user->role->name}}
+                                </li>
+                                <li><i class="fa fa-envelope user-profile-icon"></i> {{$address->first()->street . ' , '. $address->first()->province}}
+                                </li>           
       
                              </ul>
       
@@ -74,35 +75,27 @@
                                                     <div class="x_content">                                        
                                                     <table class="table table-striped">                                                              
                                                         <tbody>
-                                                        <tr>
-                                                            <th>Name </th>
-                                                            <th>{{ucfirst($user->name)}} </tr>                                                         
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Surname </th>
-                                                            <th>My Name </tr>                                                         
-                                                        </tr>
+                                                            <tr>
+                                                                <th>Full Name </th>
+                                                                <th>{{ucfirst($user->name).' '}}  {{ucfirst($user->surname)}} </tr>                                                         
+                                                            </tr>                                                        
 
-                                                        <tr>
-                                                            <th>Email </th>
-                                                            <th>My Name </tr>                                                         
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Address </th>
-                                                            <th>My Name </tr>                                                         
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Date of birth </th>
-                                                            <th>My Name </tr>                                                         
-                                                        </tr>
-                                                        <tr>
-                                                            <th>ID </th>
-                                                            <th>My Name </tr>                                                         
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Cell Number </th>
-                                                            <th>My Name </tr>                                                         
-                                                        </tr>                                                               
+                                                            <tr>
+                                                                <th>Email </th>
+                                                                <th>{{$user->email}} </tr>                                                         
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Address </th>
+                                                                <th>{{$address->first()->street . ' , '. $address->first()->province . ' , '. $address->first()->postal_code}} </tr>                                                         
+                                                            </tr>
+                                                            <tr>
+                                                                <th>ID </th>
+                                                                <th>{{$user->id_number}} </tr>                                                         
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Cell Number </th>
+                                                                <th>{{$user->mobile_number}} </tr>                                                         
+                                                            </tr>                                                               
                                                         </tbody>
                                                     </table>                                        
                                                     </div>
@@ -203,7 +196,7 @@
                              
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                    <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                                    <a href="{{url('/users/edit',$user->id)}}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
                                     <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Generate Profile PDF</a>
                                 </div>
                             </div>
@@ -213,12 +206,12 @@
                     
                     </div>
                 
-                </div>
+            </div>
             
-            </div> 
+        </div> 
         
-        </div>
-    
     </div>
+    
+</div>
 
 @endsection

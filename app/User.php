@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'photo_id', 'is_active', '',
+        'name', 'email', 'password', 'role_id', 'photo_id', 'is_active', 'mobile_number', 'tel_number', 'id_number', 'gender', 'surname',
     ];
 
     /**
@@ -26,18 +26,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function role()
-    {
-        return $this->belongsTo('App\Role');
-    }
-
-    public function photo()
-    {
-
-        return $this->belongsTo('App\Photo');
-
-    }
 
     public function setPasswordAttribute($password)
     {
@@ -78,4 +66,45 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    //********************************************************************/
+    //                RELATIONSHIPS WITH USERS
+    //*********************************************************************/
+
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
+    }
+
+    public function photo()
+    {
+        return $this->belongsTo('App\Photo');
+
+    }
+
+    // public function qualification()
+    // {
+    //     return $this->hasMany('App\Qualification');
+    // }
+
+    // public function references()
+    // {
+    //     return $this->hasMany('App\References');
+    // }
+
+    // public function career_overview()
+    // {
+    //     return $this->hasMany('App\CareerOverview');
+    // }
+
+    // public function address()
+    // {
+    //     return $this->hasMany('App\Address');
+    // }
+
+    // public function results()
+    // {
+    //     return $this->hasMany('App\Results');
+    // }
+
 }

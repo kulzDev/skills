@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Address;
 use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\UsersRequest;
 use App\Photo;
@@ -101,8 +102,9 @@ class AdminUsersController extends Controller
 
         $user = User::findOrFail($id);
         $roles = Role::pluck('name', 'id')->all();
+        $address = Address::where('user_id', '=', $id)->get();
 
-        return view('admin.users.user_profile', compact('user', 'roles'));
+        return view('admin.users.user_profile', compact('user', 'roles', 'address'));
     }
 
     /**
@@ -130,7 +132,8 @@ class AdminUsersController extends Controller
      */
     public function update(UsersEditRequest $request, $id)
     {
-        //
+
+        //return $request->all();
 
         if (trim($request->password) == '') {
 
@@ -158,6 +161,12 @@ class AdminUsersController extends Controller
 
         }
 
+        $newAddress = array('street' => $input['street'], 'province' => $input['province'], 'postal_code' => $input['postal_code'], 'user_id' => $id);
+
+        //find the address
+        $address = Address::where('user_id', '=', $id)->get();
+        $address->update($newAddress);
+
         $user->update($input);
         return redirect('/users/list');
     }
@@ -171,6 +180,9 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
+
+        $user = User::findOrFail($id);
+
     }
 
     //******************** STUDENT PAGES ********************

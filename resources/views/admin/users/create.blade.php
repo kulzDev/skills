@@ -33,7 +33,7 @@
                           {{$roles}} --}}
 
                       
-                              {{(new DateTime())->format('Y-m-d H:i:s')}}
+                              {{-- {{(new DateTime())->format('Y-m-d H:i:s')}} --}}
                        
 
 
@@ -48,6 +48,15 @@
                                             {!! Form::label('name', 'Name: *', ['class' => 'col-lg-2 control-label']) !!}
                                             <div class="col-lg-10">
                                                 {!! Form::text('name', $value = null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Surname -->
+                                        <div class="form-group">
+                                            {!! Form::label('surname', 'Surname: *', ['class' => 'col-lg-2 control-label']) !!}
+                                            <div class="col-lg-10">
+                                                {!! Form::text('surname', $value = null, ['class' => 'form-control', 'placeholder' => 'Surname']) !!}
                                             </div>
                                         </div>
 
