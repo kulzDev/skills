@@ -36,19 +36,37 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/dashboard', 'AdminUsersController@admin_dashboard');
     Route::get('/users/list', 'AdminUsersController@user_list');
     Route::get('/profile/list', 'AdminUsersController@user_profile');
-    Route::get('/users/create', 'AdminUsersController@create');
-    Route::post('/users/store', 'AdminUsersController@store');
     Route::get('/users/edit/{id}', 'AdminUsersController@edit');
-    Route::patch('/users/update/{id}', 'AdminUsersController@update');
+    Route::get('/users/create', 'AdminUsersController@create');
+    Route::get('/users/create/qualification/{id}', 'AdminUsersController@create_qualification');
+    Route::get('/users/create/careeroverview/{id}', 'AdminUsersController@create_careeroverview');
+    Route::get('/users/create/reference/{id}', 'AdminUsersController@create_reference');
 
     Route::get('/administrator/users/show/{id}', 'AdminUsersController@show');
     Route::get('/lecture/users/show/{id}', 'LectureController@show');
     Route::get('/student/users/show/{id}', 'StudentController@show');
 
+    Route::post('/users/store', 'AdminUsersController@store');
+    Route::post('/users/store/qualification/{id}', 'AdminUsersController@store_qualification');
+    Route::post('/users/store/careeroverview/{id}', 'AdminUsersController@store_careeroverview');
+    Route::post('/users/store/reference/{id}', 'AdminUsersController@store_reference');
+
+    Route::patch('/users/updateArchievement/{id}', 'AdminUsersController@updateArchievement');
+    Route::patch('/users/updateSkills/{id}', 'AdminUsersController@updateSkills');
+    Route::patch('/users/update/{id}', 'AdminUsersController@update');
+
+    //Course
+    Route::get('/course/list', 'AdminUsersController@course_list');
+    Route::get('/course/create', 'AdminUsersController@course_create');
+    Route::post('/course/store', 'AdminUsersController@store_course');
+
+    //Adding Students to courses
+    Route::get('/add/students/{id}', 'AdminUsersController@add_course');
+
     //PAGES
     Route::get('/viewcourses', 'PagesController@course_material_view');
     Route::get('/uploadcourses', 'PagesController@course_material_upload');
-    Route::get('/courses', 'PagesController@courses');
+    // Route::get('/courses', 'PagesController@courses');
     Route::get('/discussions', 'PagesController@discussions');
     Route::get('/calendar', 'PagesController@calendar');
 

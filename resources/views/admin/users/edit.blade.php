@@ -190,7 +190,7 @@
 
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Profile </h2>
+                        <h2>Edit Profile </h2>
                         <div class="clearfix"></div>
                     </div>
     
@@ -246,8 +246,7 @@
                                                     <p class="lead">About {{ucfirst($user->name)}}  </p>   --}}
 
                                                     <div class="x_panel">                                                    
-                                                        <div class="x_content"> 
-                                                            
+                                                        <div class="x_content">                                                            
                                                             
                                                                 @include('inc.form_errors')
                 
@@ -392,12 +391,35 @@
                                                 </div>
                                                 <div class="tab-pane" id="skills">
                                                     <p class="lead">Skills and Competencies</p>
-                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
-                                                            synth. Cosby sweater eu banh mi, qui irure terr.</p>
+                                                     {!! Form::model($user, ['method'=>'PATCH',  'class' => 'form-horizontal', 'action'=> ['AdminUsersController@updateSkills', $user->id],'files'=>true]) !!}
+                                                        
+                                                    <fieldset>                                                   
+                                                        <!-- Archievements -->
+                                                        <div class="form-group">
+                                                            {!! Form::label('', '', ['class' => 'col-lg-3 control-label']) !!}
+                                                            <div class="col-lg-10">
+                                                                {!! Form::textarea('skills', $value = null, ['class' => 'form-control', 'placeholder' => 'List all of your skills and competencies']) !!}
+                                                            </div>
+                                                        </div>
+                                                        <!-- Submit Button -->
+                                                        <div class="form-group">
+                                                            <div class="col-lg-10 col-lg-offset-3">
+                                                                {!! Form::submit('Add Skills', ['class' => 'btn  btn-primary'] ) !!}
+                                                            </div>
+                                                        </div>
+                                                
+                                                    </fieldset> 
+                                                    
+                                                    {!! Form::close() !!}
+    
+                                                            
                                                 </div>
     
                                                 <div class="tab-pane" id="education">
-                                                    <p class="lead">Education and Qualifications</p>
+                                                    {{-- <p class="lead">Education and Qualifications</p> --}}
+                                                    <ul class="nav navbar-right panel_toolbox">                 
+                                                        <li> <a href="{{url('/users/create/qualification',$user->id)}}"><span class="btn btn-primary">Add Qualifications</span> </a></li>                                                                         
+                                                    </ul>
                                                     <div class="x_panel">                                           
                                                         <div class="x_content">                                      
                                                             <table class="table table-striped">
@@ -409,11 +431,21 @@
                                                                   </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr>                                                               
-                                                                        <td>Larry</td>
-                                                                        <td>the Bird</td>
-                                                                        <td>@twitter</td>
-                                                                    </tr>
+
+                                                               
+
+                                                                    @foreach ($qualification as $q)
+
+                                                                         <tr>                                                               
+                                                                            <td>{{$q->name}}</td>
+                                                                            <td>{{$q->institution}} </td>
+                                                                            <td>{{$q->year}}</td>
+                                                                        </tr>
+                                                                        
+                                                                    @endforeach    
+                                                                   
+
+
                                                                 </tbody>
                                                             </table>                                    
                                                         </div>
@@ -422,12 +454,37 @@
     
                                                 <div class="tab-pane" id="archievements">
                                                     <p class="lead">Archievements</p>
-                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
-                                                    synth. Cosby sweater eu banh mi, qui irure terr.</p>
+
+                                                    {!! Form::model($user, ['method'=>'PATCH',  'class' => 'form-horizontal', 'action'=> ['AdminUsersController@updateArchievement', $user->id],'files'=>true]) !!}
+                                                        
+                                                    <fieldset>        
+                                                    
+                                                        <!-- Archievements -->
+                                                        <div class="form-group">
+                                                            {!! Form::label('', '', ['class' => 'col-lg-3 control-label']) !!}
+                                                            <div class="col-lg-10">
+                                                                {!! Form::textarea('archievements', $value = null, ['class' => 'form-control', 'placeholder' => 'List all of your archiements']) !!}
+                                                            </div>
+                                                        </div>
+                                                        <!-- Submit Button -->
+                                                        <div class="form-group">
+                                                            <div class="col-lg-10 col-lg-offset-3">
+                                                                {!! Form::submit('Add Archiements', ['class' => 'btn  btn-primary'] ) !!}
+                                                            </div>
+                                                        </div>
+                                                
+                                                    </fieldset> 
+                                                    
+                                                    {!! Form::close() !!}
+    
+                                                        
                                                 </div>
     
                                                 <div class="tab-pane" id="career_overview">
-                                                    <p class="lead">Career Overview</p>
+                                                    {{-- <p class="lead">Career Overview</p> --}}
+                                                    <ul class="nav navbar-right panel_toolbox">                 
+                                                        <li> <a href="{{url('/users/create/careeroverview',$user->id)}}"><span class="btn btn-primary">Add Career Overview</span> </a></li>                                                                         
+                                                    </ul>
                                                     <div class="x_panel">                                           
                                                         <div class="x_content">                                      
                                                             <table class="table table-striped">
@@ -439,11 +496,13 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr>                                                               
-                                                                        <td>Larry</td>
-                                                                        <td>the Bird</td>
-                                                                        <td>@twitter</td>
-                                                                    </tr>
+                                                                    @foreach ($career as $q)
+                                                                        <tr>                                                               
+                                                                           <td>{{$q->company_name}}</td>
+                                                                           <td>{{$q->designation}} </td>
+                                                                           <td>{{$q->duration}}</td>
+                                                                       </tr>                                                                       
+                                                                    @endforeach  
                                                                 </tbody>
                                                             </table>                                    
                                                         </div>
@@ -451,35 +510,43 @@
                                                 </div>
     
                                                 <div class="tab-pane" id="references">
-                                                    <p class="lead">References</p>                                              
-                                                        <div class="x_panel">                                           
-                                                            <div class="x_content">                                      
-                                                                <table class="table table-striped">
-                                                                    <thead>
-                                                                        <tr>
-                                                                        <th>Company</th>
-                                                                        <th>Designation</th>
-                                                                        <th>Duration</th>                                                              
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
+                                                    {{-- <p class="lead">References</p> --}}
+                                                    <ul class="nav navbar-right panel_toolbox">                 
+                                                        <li> <a href="{{url('/users/create/reference',$user->id)}}"><span class="btn btn-primary">Add references</span> </a></li>                                                                         
+                                                    </ul>                                              
+                                                    <div class="x_panel">                                           
+                                                        <div class="x_content">                                      
+                                                            <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                    <th>Full Name</th>
+                                                                    <th>Email</th>
+                                                                    <th>Mobile</th>
+                                                                    <th>Tel</th>                                                              
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach ($reference as $ref)
                                                                         <tr>                                                               
-                                                                            <td>Larry</td>
-                                                                            <td>the Bird</td>
-                                                                            <td>@twitter</td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>                                    
-                                                            </div>
+                                                                           <td>{{$ref->name .' '.$ref->surname}}</td>
+                                                                           <td>{{$ref->email}} </td>
+                                                                           <td>{{$ref->mobile_number}}</td>
+                                                                           <td>{{$ref->mobile_number}}</td>
+                                                                       </tr>                                                                       
+                                                                    @endforeach  
+                                                                </tbody>
+                                                                </tbody>
+                                                            </table>                                    
                                                         </div>
                                                     </div>
                                                 </div>
-    
                                             </div>
-                                        </div>            
-                                         <div class="clearfix"></div>            
-                                    </div>
+    
+                                        </div>
+                                    </div>            
+                                    <div class="clearfix"></div>            
                                 </div>
+                            </div>
                                 
                                  
                                 {{-- <div class="form-group">
@@ -489,10 +556,10 @@
                                     </div>
                                 </div> --}}
                                  
-                            </div>
+                        </div>
                             
                         
-                        </div>
+                    </div>
                     
                 </div>
     </div>

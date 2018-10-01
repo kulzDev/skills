@@ -15,7 +15,7 @@
                         <li><a href="{{url('/progressreport')}}"> Progress Report </a>
                 </ul>
             </li>
-            <li><a href="{{url('/courses')}}"><i class="fa fa-group"></i> Courses </a></li>
+            <li><a href="{{url('/course/list')}}"><i class="fa fa-book"></i> Courses </a></li>
 
             <li><a ><i class="fa fa-download"></i> Course Materials <span class="fa fa-chevron-down"></span></a>
             
@@ -30,7 +30,7 @@
 
             <li><a href="{{url('/calendar')}}"><i class="fa fa-calendar"></i> Calender </a></li>
 
-            <li><a href="{{url('/profiles')}}"><i class="fa fa-calendar"></i> profile </a></li>
+            {{-- <li><a href="{{url('/profiles')}}"><i class="fa fa-calendar"></i> profile </a></li> --}}
 
            
         </ul>

@@ -11,10 +11,8 @@
 <!-- page content -->
 
 <div class="">
-
     <div class="clearfix"></div>
     <div class="row">
-
         <div class="col-md-12 col-sm-12 col-xs-12">
 
             <div class="x_panel">
@@ -39,7 +37,7 @@
                                 <li>
                                     <i class="fa fa-briefcase user-profile-icon"></i> {{$user->role->name}}
                                 </li>
-                                <li><i class="fa fa-envelope user-profile-icon"></i> {{$address->first()->street . ' , '. $address->first()->province}}
+                                <li><i class="fa fa-envelope user-profile-icon"></i> {{count($address) > 0 ? $address->first()->street . ' , '. $address->first()->province : "No Address"}}
                                 </li>           
       
                              </ul>
@@ -86,7 +84,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <th>Address </th>
-                                                                <th>{{$address->first()->street . ' , '. $address->first()->province . ' , '. $address->first()->postal_code}} </tr>                                                         
+                                                                <th>{{ count($address) > 0 ? $address->first()->street . ' , '. $address->first()->province . ' , '. $address->first()->postal_code : "No Address"}} </tr>                                                         
                                                             </tr>
                                                             <tr>
                                                                 <th>ID </th>
@@ -104,8 +102,7 @@
                                             </div>
                                             <div class="tab-pane" id="skills">
                                                 <p class="lead">Skills and Competencies</p>
-                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
-                                                        synth. Cosby sweater eu banh mi, qui irure terr.</p>
+                                                <p>{{$user->it_skills}}</p>
                                             </div>
 
                                             <div class="tab-pane" id="education">
@@ -121,11 +118,13 @@
                                                               </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>                                                               
-                                                                    <td>Larry</td>
-                                                                    <td>the Bird</td>
-                                                                    <td>@twitter</td>
-                                                                </tr>
+                                                                @foreach ($qualification as $q)
+                                                                    <tr>                                                               
+                                                                       <td>{{$q->name}}</td>
+                                                                       <td>{{$q->institution}} </td>
+                                                                       <td>{{$q->year}}</td>
+                                                                   </tr>                                                                   
+                                                                @endforeach 
                                                             </tbody>
                                                         </table>                                    
                                                     </div>
@@ -133,9 +132,14 @@
                                             </div>
 
                                             <div class="tab-pane" id="archievements">
+
+
+                                                
                                                 <p class="lead">Archievements</p>
-                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
-                                                synth. Cosby sweater eu banh mi, qui irure terr.</p>
+                                                <p>{{$user->archievement}}</p>
+
+
+
                                             </div>
 
                                             <div class="tab-pane" id="career_overview">
@@ -151,11 +155,13 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>                                                               
-                                                                    <td>Larry</td>
-                                                                    <td>the Bird</td>
-                                                                    <td>@twitter</td>
-                                                                </tr>
+                                                                @foreach ($career as $q)
+                                                                    <tr>                                                               
+                                                                       <td>{{$q->company_name}}</td>
+                                                                       <td>{{$q->designation}} </td>
+                                                                       <td>{{$q->duration}}</td>
+                                                                   </tr>                                                                       
+                                                                @endforeach  
                                                             </tbody>
                                                         </table>                                    
                                                     </div>
@@ -175,11 +181,14 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr>                                                               
-                                                                        <td>Larry</td>
-                                                                        <td>the Bird</td>
-                                                                        <td>@twitter</td>
-                                                                    </tr>
+                                                                    @foreach ($reference as $ref)
+                                                                        <tr>                                                               
+                                                                           <td>{{$ref->name .' '.$ref->surname}}</td>
+                                                                           <td>{{$ref->email}} </td>
+                                                                           <td>{{$ref->mobile_number}}</td>
+                                                                           <td>{{$ref->mobile_number}}</td>
+                                                                       </tr>                                                                       
+                                                                    @endforeach 
                                                                 </tbody>
                                                             </table>                                    
                                                         </div>

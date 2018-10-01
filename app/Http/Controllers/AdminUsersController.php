@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Address;
+use App\CareerOverview;
+use App\Course;
+use App\Http\Requests\UserCareerOverviewRequest;
+use App\Http\Requests\UserQualificationRequest;
+use App\Http\Requests\UserReferenceRequest;
 use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\UsersRequest;
 use App\Photo;
+use App\Qualification;
+use App\Reference;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -103,8 +110,11 @@ class AdminUsersController extends Controller
         $user = User::findOrFail($id);
         $roles = Role::pluck('name', 'id')->all();
         $address = Address::where('user_id', '=', $id)->get();
+        $qualification = Qualification::where('user_id', '=', $id)->get();
+        $career = CareerOverview::where('user_id', '=', $id)->get();
+        $reference = Reference::where('user_id', '=', $id)->get();
 
-        return view('admin.users.user_profile', compact('user', 'roles', 'address'));
+        return view('admin.users.user_profile', compact('user', 'roles', 'address', 'qualification', 'career', 'reference'));
     }
 
     /**
@@ -119,8 +129,11 @@ class AdminUsersController extends Controller
 
         $user = User::findOrFail($id);
         $roles = Role::pluck('name', 'id')->all();
+        $qualification = Qualification::where('user_id', '=', $id)->get();
+        $career = CareerOverview::where('user_id', '=', $id)->get();
+        $reference = Reference::where('user_id', '=', $id)->get();
 
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.edit', compact('user', 'roles', 'qualification', 'career', 'reference'));
     }
 
     /**
@@ -161,11 +174,20 @@ class AdminUsersController extends Controller
 
         }
 
-        $newAddress = array('street' => $input['street'], 'province' => $input['province'], 'postal_code' => $input['postal_code'], 'user_id' => $id);
+        //if the address is filled
+        if ($input['street'] && $input['province'] && $input['postal_code']) {
 
-        //find the address
-        $address = Address::where('user_id', '=', $id)->get();
-        $address->update($newAddress);
+            $newAddress = array('street' => $input['street'], 'province' => $input['province'], 'postal_code' => $input['postal_code'], 'user_id' => $id);
+
+            //find the address
+
+            if (count($address = Address::where('user_id', '=', $id)->get()) == 0) {
+                Address::create($newAddress);
+            } else {
+                $address->first()->update($newAddress);
+            }
+            //$address->update($newAddress);
+        }
 
         $user->update($input);
         return redirect('/users/list');
@@ -203,6 +225,129 @@ class AdminUsersController extends Controller
     public function admin_dashboard()
     {
         return view('admin.dashboard');
+    }
+
+    /************************************************************************************************ */
+    /*  --------------------------   Qualifications  -----------------------------    */
+    /************************************************************************************************ */
+
+    public function create_qualification($id)
+    {
+
+        return view('admin.users.create_qualification', compact('id'));
+    }
+
+    public function store_qualification(UserQualificationRequest $request)
+    {
+
+        Qualification::create($request->all());
+
+        return redirect('/users/edit/' . $request['user_id']);
+
+    }
+
+    /************************************************************************************************ */
+    /*  --------------------------   CareerOverview  -----------------------------    */
+    /************************************************************************************************ */
+
+    public function create_careeroverview($id)
+    {
+        //return $career = CareerOverview::where('user_id', '=', $id)->get();
+        //return $qualification = Qualification::where('user_id', '=', 3)->get();
+        return view('admin.users.create_careeroverview', compact('id'));
+    }
+
+    public function store_careeroverview(UserCareerOverviewRequest $request)
+    {
+
+        CareerOverview::create($request->all());
+
+        return redirect('/users/edit/' . $request['user_id']);
+
+    }
+
+    /************************************************************************************************ */
+    /*  --------------------------   CareerOverview  -----------------------------    */
+    /************************************************************************************************ */
+
+    public function create_reference($id)
+    {
+        //return $career = CareerOverview::where('user_id', '=', $id)->get();
+        //return $qualification = Qualification::where('user_id', '=', 3)->get();
+        return view('admin.users.create_reference', compact('id'));
+    }
+
+    public function store_reference(UserReferenceRequest $request)
+    {
+
+        Reference::create($request->all());
+
+        return redirect('/users/edit/' . $request['user_id']);
+
+    }
+
+    /************************************************************************************************ */
+    /*    --------------------------  Update User Archievements ----------------------------------     */
+    /************************************************************************************************ */
+
+    public function updateArchievement(Request $request, $id)
+    {
+        $input = $request->all();
+        $user = User::findOrFail($id);
+        $user->where('id', $id)->update(['archievement' => $input['archievements']]);
+
+        //return $user; //['archievements']; // . $user['archievement'] . ' Id: ' . $id ;
+        return redirect('/users/list');
+    }
+
+    public function updateSkills(Request $request, $id)
+    {
+        $input = $request->all();
+        $user = User::findOrFail($id);
+        $user->where('id', $id)->update(['it_skills' => $input['skills']]);
+
+        //return $user; //['archievements']; // . $user['archievement'] . ' Id: ' . $id ;
+        return redirect('/users/list');
+    }
+
+    /************************************************************************************************ */
+    /** -----------------------------------------   courses           --------------------------- */
+    /************************************************************************************************ */
+    public function course_list()
+    {
+
+        $courses = Course::all();
+        return view('admin.courses.list', compact('courses'));
+    }
+
+    public function course_create()
+    {
+        //
+
+        return view('admin.courses.create');
+    }
+
+    public function store_course(Request $request)
+    {
+        // //
+
+        Course::create($request->all());
+
+        $courses = Course::all();
+
+        return view('admin.courses.list')->with('courses', $courses); //, compact('courses'));
+
+        //return $request->all();
+    }
+
+    public function add_course($id)
+    {
+
+        $users = User::all();
+        $course = Course::findOrFail($id);
+        return view('admin.courses.addStudent', compact('courses', 'users'));
+
+        //return $id;
     }
 
 }
